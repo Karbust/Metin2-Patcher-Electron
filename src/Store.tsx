@@ -4,7 +4,6 @@ import { createContext, FunctionComponent, useReducer } from 'react'
 import Reducer from './Reducer'
 
 const initialState = {
-    progressSize: 0,
     totalSize: 0,
     completed: 0
 }

@@ -66,7 +66,7 @@ ipcMain.on("toMain", (event, args) => {
                 /*writeFile(file, "", { flag: 'wx' }, (err) => {
                     if (err) throw err;
                 });*/
-                mainWindow.webContents.downloadURL(`http://localhost:81/electron/files/${fileData.fileName}`);
+                mainWindow.webContents.downloadURL(`http://localhost/files/${fileData.fileName}`);
             } else {
                 const hash = createHash('sha256')
                 const input = createReadStream(file);
@@ -80,7 +80,7 @@ ipcMain.on("toMain", (event, args) => {
                         //console.log(digest)
                         if (digest !== fileData.hash) {
                             //console.log('different')
-                            mainWindow.webContents.downloadURL(`http://localhost:81/electron/files/${fileData.fileName.replace(/\\\\/g, '\\')}`);
+                            mainWindow.webContents.downloadURL(`http://localhost/files/${fileData.fileName.replace(/\\\\/g, '\\')}`);
                         } else {
                             progressSize += fileData.size
                             mainWindow.webContents.send("fromMainProgressSize", { progressSize });
@@ -99,8 +99,7 @@ ipcMain.on("toMain", (event, args) => {
         http:\\localhost:81\electron\files\bgm\a_rhapsody_of_war.mp3
          */
         const regex = /\\((?!files).)*\\?$/g
-        console.log(item.getFilename())
-        console.log(`C:\\Users\\Karbust\\Desktop\\testerino${item.getURL().replace(/\//g, '\\').replace(/(%20)/g, ' ').match(regex)}`)
+        //console.log(`C:\\Users\\Karbust\\Desktop\\testerino${item.getURL().replace(/\//g, '\\').replace(/(%20)/g, ' ').match(regex)}`)
         item.setSavePath(`C:\\Users\\Karbust\\Desktop\\testerino${item.getURL().replace(/\//g, '\\').replace(/(%20)/g, ' ').match(regex)}`);
 
         item.on('updated', (event, state) => {
@@ -110,15 +109,15 @@ ipcMain.on("toMain", (event, args) => {
                 if (item.isPaused()) {
                     console.log('Download is paused');
                 } else {
-                    //progressSize += item.getReceivedBytes()
-                    console.log('Received bytes: ', item.getReceivedBytes());
-                    //mainWindow.webContents.send("fromMainProgressSize", { progressSize });
+                    progressSize += item.getReceivedBytes()
+                    //console.log('Received bytes: ', item.getReceivedBytes());
                 }
             }
         });
         item.once('done', (event, state) => {
             if (state === 'completed') {
                 //console.log('Download successfully');
+                mainWindow.webContents.send("fromMainProgressSize", { progressSize });
             } else {
                 //console.log('Download failed: ', state);
             }
