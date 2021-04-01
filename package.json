@@ -1,0 +1,94 @@
+{
+  "name": "metin2-patcher-electron",
+  "author": "Karbust",
+  "description": "A simple metin2 patcher made in Electron with React and TypeScript.",
+  "version": "0.1.0",
+  "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron-start": "electron .",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-builder --win -c.extraMetadata.main=build/electron.js",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
+    "lint-fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
+  },
+  "build": {
+    "productName": "Metin2 Patcher Electron",
+    "win": {
+      "target": [
+        "portable",
+        "zip",
+        "nsis",
+        "nsis-web",
+        "dir"
+      ],
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "portable": {
+      "artifactName": "metin2_patcher_electron.exe"
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "electron": "^12.0.2",
+    "electron-is-dev": "^2.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.3",
+    "react-scripts": "4.0.3",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.16",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "electron-builder": "^22.10.5",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-flowtype": "^5.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "typescript": "^4.1.2"
+  }
+}
