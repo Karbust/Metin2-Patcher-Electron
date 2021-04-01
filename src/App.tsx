@@ -1,8 +1,10 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+// @ts-nocheck
+import { FunctionComponent, useEffect, useContext, useState } from 'react'
 
 import logo from './logo.svg'
 import './App.css'
 import ProgressBar from './ProgressBar'
+import { Context } from './Store'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -11,9 +13,11 @@ let totalSize = 0
 let completed = 0
 
 ipcRenderer.on('fromMainProgressSize', (event: any, data: any) => {
+    const [state, dispatch] = useContext(Context)
     progressSize += data.progressSize
     console.log(progressSize)
     completed = Math.floor((progressSize * 100) / totalSize)
+    dispatch({ type: 'SET_COMPLETED', payload: Math.floor((progressSize * 100) / totalSize) })
     //ipcRenderer.removeAllListeners('fromMainProgressSize')
 })
 ipcRenderer.once('fromMainTotalSize', (event: any, data: any) => {
@@ -22,9 +26,10 @@ ipcRenderer.once('fromMainTotalSize', (event: any, data: any) => {
 })
 
 const App: FunctionComponent = () => {
+    const [state, dispatch] = useContext(Context)
     const [completedPercentage, setCompletedPercentage] = useState(completed)
     useEffect(() => {
-        fetch('http://localhost:81/electron/files.json', { cache: 'no-store' })
+        fetch('http://localhost/files.json', { cache: 'no-store' })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
@@ -33,7 +38,7 @@ const App: FunctionComponent = () => {
             })
     }, [])
 
-    console.log(completedPercentage)
+    console.log(state.completed)
 
     return (
         <div className='App'>

@@ -4,14 +4,14 @@ const {
     ipcMain
 } = require("electron");
 
-const { access, constants, writeFile, mkdir, createReadStream, existsSync } = require("fs");
+const { access, constants, mkdir, createReadStream, existsSync } = require("fs");
 const path = require('path');
 const { createHash } = require('crypto');
 const isDev = require('electron-is-dev');
 
 let mainWindow;
 
-function createWindow() {
+const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 1500,
         height: 900,
@@ -103,7 +103,7 @@ ipcMain.on("toMain", (event, args) => {
         console.log(`C:\\Users\\Karbust\\Desktop\\testerino${item.getURL().replace(/\//g, '\\').replace(/(%20)/g, ' ').match(regex)}`)
         item.setSavePath(`C:\\Users\\Karbust\\Desktop\\testerino${item.getURL().replace(/\//g, '\\').replace(/(%20)/g, ' ').match(regex)}`);
 
-        item.on('updated', function(event, state) {
+        item.on('updated', (event, state) => {
             if (state === 'interrupted') {
                 console.log('Download is interrupted but can be resumed');
             } else if (state === 'progressing') {
@@ -116,7 +116,7 @@ ipcMain.on("toMain", (event, args) => {
                 }
             }
         });
-        item.once('done', function(event, state) {
+        item.once('done', (event, state) => {
             if (state === 'completed') {
                 //console.log('Download successfully');
             } else {
