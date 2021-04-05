@@ -1,0 +1,96 @@
+{
+  "name": "metin2-patcher-electron",
+  "author": "Karbust",
+  "description": "A simple metin2 patcher made in Electron with React and TypeScript.",
+  "version": "0.1.0",
+  "private": true,
+  "main": "build/electron/src_electron/App.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "electron-start": "tsc --project src_electron/tsconfig.json && electron build/electron/src_electron/App.js",
+    "electron-pack": "yarn build && tsc --project src_electron/tsconfig.json && electron-builder --win -c.extraMetadata.main=build/electron/src_electron/App.js",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
+    "lint-fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
+  },
+  "build": {
+    "extends": null,
+    "productName": "Metin2 Patcher Electron",
+    "compression": "store",
+    "win": {
+      "target": ["portable", "zip"],
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "portable": {
+      "artifactName": "metin2_patcher_electron.exe",
+      "requestExecutionLevel": "admin",
+      "unpackDirName": "metin2_patcher_electron"
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "electron-is-dev": "^2.0.0",
+    "is-online": "^9.0.0",
+    "mkdirp": "^1.0.4",
+    "node-fetch": "^2.6.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@types/mkdirp": "^1.0.1",
+    "@types/node": "^14.14.37",
+    "@types/node-fetch": "^2.5.9",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "autoprefixer": "9",
+    "electron": "^12.0.2",
+    "electron-builder": "^22.10.5",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-flowtype": "^5.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "postcss": "7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.2.3"
+  }
+}
