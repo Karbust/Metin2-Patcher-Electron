@@ -1,60 +1,81 @@
-// @ts-nocheck
-import { FunctionComponent, useEffect, useContext, useState } from 'react'
+import { FunctionComponent, useContext, useEffect, useRef } from 'react'
+import * as isOnline from 'is-online'
 
-import logo from './logo.svg'
-import './App.css'
-import ProgressBar from './ProgressBar'
-import { Context } from './Store'
+import Titlebar from './components/Titlebar'
+import ProgressBar from './components/ProgressBar'
+import Buttons from './components/Buttons'
+import { Context } from './reducer/Store'
+import { patchlistUrl } from './config'
 
 const { ipcRenderer } = window.require('electron')
 
-let progressSize = 0
-let totalSize = 0
+ipcRenderer.setMaxListeners(0)
 
 const App: FunctionComponent = () => {
-    const [state, dispatch] = useContext(Context)
+    // @ts-ignore
+    const { dispatch } = useContext(Context)
+    let globalProgress = 0
+    const totalSize = useRef(0)
+    const dataJson = useRef([])
 
-    ipcRenderer.on('fromMainProgressSize', (event: any, data: any) => {
-        progressSize += data.progressSize
-        console.log(progressSize)
-        dispatch({ type: 'SET_COMPLETED', payload: Math.floor((progressSize * 100) / totalSize) })
-        //ipcRenderer.removeAllListeners('fromMainProgressSize')
-    })
-    ipcRenderer.once('fromMainTotalSize', (event: any, data: any) => {
-        totalSize = data.totalSize
-        ipcRenderer.removeAllListeners('fromMainTotalSize')
+    ipcRenderer.once('provide-worker-channel', (eventParent: { ports: [any] }) => {
+        const [port] = eventParent.ports
+        port.onmessage = ({ data }: { data: any }) => {
+            if (data.type === 'fileProgress') {
+                dispatch({
+                    type: 'SET_FILEPROGRESS',
+                    payload: Math.floor((data.progressSize * 100) / data.total_bytes)
+                })
+                dispatch({
+                    type: 'SET_CURRENTFILE',
+                    payload: data.currentFile
+                })
+            } else if (data.type === 'progressSize' || data.type === 'end') {
+                globalProgress += data.progressSize
+                dispatch({
+                    type: 'SET_COMPLETED',
+                    payload: Math.floor((globalProgress * 100) / totalSize.current)
+                })
+            } else if (data.type === 'verifyingFile') {
+                dispatch({
+                    type: 'SET_ACTION',
+                    payload: data.action
+                })
+            }
+        }
+        port.postMessage(dataJson.current)
     })
 
     useEffect(() => {
-        fetch('http://localhost/files.json', { cache: 'no-store' })
-            .then((response) => response.json())
-            .then((data) => {
-                ipcRenderer.send('toMain', data)
-                ipcRenderer.removeAllListeners('toMain')
-            })
-    }, [])
+        (async () => {
+            if (!await isOnline.default()) {
+                ipcRenderer.send('noNetwork')
+            } else {
+                fetch(patchlistUrl, { cache: 'no-store' })
+                    .then((response) => response.json())
+                    .then((result) => {
+                        result.forEach((file: { size: number }) => {
+                            totalSize.current += file.size
+                        })
+                        dataJson.current = result
+
+                        ipcRenderer.send('request-worker-channel')
+                        ipcRenderer.removeAllListeners('request-worker-channel')
+                    })
+                    .catch((err) => {
+                        ipcRenderer.send('errorServer')
+                    })
+            }
+        })()
+    }, [dispatch])
 
     return (
-        <div className='App'>
-            <header className='App-header'>
-                <img src={logo} className='App-logo' alt='logo' />
-                <p>
-                    Edit
-                    {' '}
-                    <code>src/App.tsx</code>
-                    {' '}
-                    and save to reload.
-                </p>
-                <a
-                    className='App-link'
-                    href='https://reactjs.org'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    Learn React
-                </a>
-                <ProgressBar bgColor='#6a1b9a' completed={state.completed} />
-            </header>
+        <div className='h-screen w-screen bg-gray-50'>
+            <Titlebar />
+            <div className='m-2.5'>
+                <ProgressBar />
+                <Buttons />
+            </div>
         </div>
     )
 }

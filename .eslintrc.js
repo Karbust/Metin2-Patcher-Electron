@@ -55,9 +55,14 @@ module.exports = {
     },
     'root': true,
     'parser': '@typescript-eslint/parser',
-    'ignorePatterns': ['public/electron.js','.eslintrc.js'],
+    'ignorePatterns': [
+        '.eslintrc.js',
+        'craco.config.js',
+        'tailwind.config.js',
+        'dist/*'
+    ],
     'parserOptions': {
-        'project': './tsconfig.json',
+        'project': ['./tsconfig.json', './src_electron/tsconfig.json'],
         'ecmaFeatures': {
             'js': true,
             'jsx': true,

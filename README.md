@@ -1,51 +1,91 @@
 # Metin2-Patcher-Electron
-A simple metin2 patcher made in Electron with React and TypeScript.
-
+A simple metin2 patcher made in Electron with React and TypeScript.\
 The file verification is made with SHA256.
 
-# Getting Started with Create React App
+![Patcher Screenshot](https://i.imgur.com/X7dasOc.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
 
-## Available Scripts
+Install NodeJS: https://nodejs.org/en/download/ \
+Install Yarn: https://yarnpkg.com/getting-started/install
 
-In the project directory, you can run:
+Clone the repository:
+```bash
+git clone https://github.com/Karbust/Metin2-Patcher-Electron
+```
+Install the dependencies:
 
-### `yarn start`
+```bash
+yarn install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Edit `src/config.ts` with your own values.\
+Change `resources/icon.png` with your own logo (_should be at least 256x256_).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Available Commands
 
-### `yarn test`
+| Command | Purpose |
+| ------ | ------ |
+| yarn run start | Starts the React App (aka Frontend) in development mode. |
+| yarn run build | Builds a production ready React bundle. |
+| yarn run electron-start | Starts the Electron App. |
+| yarn run electron-pack | Builds a production package of the app. |
+| yarn run lint | Check for linting errors. |
+| yarn run lint-fix | Fixing some linting errors. |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## About the Patcher
+This project was made with the intend of learn more about Electron, something I wanted to do for a while.\
+If the folders don't exist, they'll be created. If the files don't exist they will be downloaded.\
+The patcher checks the local files and if their checksum mismatches the remote checksum, they will get downloaded.\
+This patcher runs the downloads **asynchronously**, this means it will download multiple files at the same time.\
+The entire project is made in React and Electron both with TypeScript.\
+For CSS was used TailwindCSS.
 
-### `yarn build`
+## Deploying
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After editing everything you must use the command `yarn run electron-pack` to build the application.\
+It will build 2 files inside the `release` folder:
+- Metin2 Patcher Electron-X.X.X-win.zip
+- metin2_patcher_electron.exe
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The first file is the full bundle zipped that can be extracted to the client folder (after removing the 2 unnecessary LINCENSE files). `DON'T USE THIS IF YOU ALREADY HAVE THE CEF BROWSER ON THE CLIENT.`\
+The second file is also zipped but will be extract to a temporary folder during runtime (takes about 3 seconds to fully open)  and clean after itself when it closes. `This is the way if you can't perform the first option.`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Development Testing
 
-### `yarn eject`
+In case there isn't the possibility to use a local webserver (like Apache with Xampp, or Wampp) it may be necessary update the CORS on your remote server.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### For NGINX
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Go to the configuration file for the patcher host and add this line: 
+```
+add_header 'Access-Control-Allow-Origin' 'http://localhost:3000';
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### For Apache
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Go to the configuration file for the patcher host and add this line:
+```
+Header set Access-Control-Allow-Origin "http://localhost:3000"
+```
 
-## Learn More
+It may also be needed to activate the headers module:
+```shell
+a2enmod headers
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Web Server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Using [this NodeJS script](https://gist.github.com/Karbust/14bbaba7910b72023e0229abf53e8d54), you shall place the client files inside a folder called `files` and run the script.\
+It will generate the JSON file with the names, sizes and checksum hash of the files.
+
+![Dir1](https://i.imgur.com/0k1sM3Y.png) \
+![Dir2](https://i.imgur.com/CHjlRiF.png)
+
+## Issues
+
+If you encounter any issue, you should open a New Issue.
+
+## License
+
+MIT
