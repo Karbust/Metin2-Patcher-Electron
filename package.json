@@ -19,7 +19,7 @@
   "build": {
     "extends": null,
     "productName": "Metin2 Patcher Electron",
-    "compression": "store",
+    "compression": "max",
     "win": {
       "target": ["portable", "zip"],
       "requestedExecutionLevel": "requireAdministrator"
