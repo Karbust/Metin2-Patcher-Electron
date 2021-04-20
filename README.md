@@ -74,6 +74,18 @@ It may also be needed to activate the headers module:
 a2enmod headers
 ```
 
+### Running on development
+
+First start the frontend ***(ensure there's nothing running on default port 3000, otherwise a different port will be assigned and the patcher will show a white screen)***:
+```bash
+yarn run start
+```
+
+Then start the electron app:
+```bash
+yarn run electron-start
+```
+
 ## Web Server
 
 Using [this NodeJS script](https://gist.github.com/Karbust/14bbaba7910b72023e0229abf53e8d54), you shall place the client files inside a folder called `files` and run the script.\
