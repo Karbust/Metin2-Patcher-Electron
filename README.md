@@ -22,6 +22,11 @@ yarn install
 Edit `src/config.ts` with your own values.\
 Change `resources/icon.png` with your own logo (_should be at least 256x256_).
 
+\
+A small video on how to set it up:
+
+[![Tutorial - Metin2 Patcher Electron](https://img.youtube.com/vi/RTtKqYfwfGA/0.jpg)](https://www.youtube.com/watch?v=RTtKqYfwfGA "Tutorial - Metin2 Patcher Electron")
+
 ## Available Commands
 
 | Command | Purpose |
