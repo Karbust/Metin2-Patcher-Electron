@@ -1,0 +1,12 @@
+{
+    "translation": {
+        "settings": "Definições",
+        "play": "Jogar",
+        "dlCompleted": "Transferência Concluída",
+        "dlProgress": "Transferência em progresso",
+        "dlFile": "A transferir {{currentFile}}",
+        "noConnection": "Não existe ligação à internet.",
+        "errorConnection": "Ocorreu um erro a ligar ao servidor.",
+        "errorDownloadFile": "Ocorreu um erro a transferir {{fileName}}"
+    }
+}

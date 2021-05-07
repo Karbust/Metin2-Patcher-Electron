@@ -1,5 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useRef } from 'react'
 import * as isOnline from 'is-online'
+import { getI18n } from 'react-i18next'
 
 import Titlebar from './components/Titlebar'
 import ProgressBar from './components/ProgressBar'
@@ -51,6 +52,7 @@ const App: FunctionComponent = () => {
             if (!await isOnline.default()) {
                 ipcRenderer.send('noNetwork')
             } else {
+                await getI18n().changeLanguage(ipcRenderer.sendSync('getLanguage'))
                 fetch(patchlistUrl, { cache: 'no-store' })
                     .then((response) => response.json())
                     .then((result) => {

@@ -1,0 +1,12 @@
+{
+    "translation": {
+        "settings": "Settings",
+        "play": "Play",
+        "dlCompleted": "Download Completed",
+        "dlProgress": "Download in progress",
+        "dlFile": "Downloading {{currentFile}}",
+        "noConnection": "There's no network connection.",
+        "errorConnection": "There was an error connecting to the server.",
+        "errorDownloadFile": "An error occurred while downloading {{fileName}}"
+    }
+}

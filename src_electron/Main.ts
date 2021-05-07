@@ -1,11 +1,15 @@
+import { existsSync, writeFileSync, readFileSync } from 'fs'
 import { spawn } from 'child_process'
 
+import i18next from 'i18next'
 import * as isDev from 'electron-is-dev'
 import { BrowserWindow, ipcMain, dialog, MessageChannelMain } from 'electron'
 
 import {
     binaryName, configName, debugFolder, launchParameters, serverName
 } from '../src/config'
+
+import i18n from './i18n'
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow
@@ -15,6 +19,8 @@ export default class Main {
     static application: Electron.App
 
     static BrowserWindow: any
+
+    static settingsFile = `${isDev ? debugFolder : process.env.PORTABLE_EXECUTABLE_DIR}\\patcher_settings`
 
     private static onWindowAllClosed() {
         if (process.platform !== 'darwin') {
@@ -61,6 +67,15 @@ export default class Main {
             Main.mainWindow.webContents.openDevTools({ mode: 'detach' })
         }
 
+        if (!existsSync(Main.settingsFile)) {
+            const obj: any = { language: 'en' }
+            writeFileSync(Main.settingsFile, JSON.stringify(obj))
+            i18next.changeLanguage('en')
+        } else {
+            const { language } = JSON.parse(readFileSync(Main.settingsFile, 'utf8'))
+            i18next.changeLanguage(language)
+        }
+
         ipcMain.on('minimize', () => Main.mainWindow.minimize())
 
         ipcMain.on('close', () => {
@@ -94,6 +109,19 @@ export default class Main {
             })
         })
 
+        ipcMain.on('languageChange', (_, args) => {
+            const settings = JSON.parse(readFileSync(Main.settingsFile, 'utf8'))
+            settings.language = args.language
+            i18next.changeLanguage(args.language)
+            writeFileSync(Main.settingsFile, JSON.stringify(settings))
+        })
+
+        ipcMain.on('getLanguage', (event) => {
+            const rawData = readFileSync(Main.settingsFile, 'utf8')
+            const settings = JSON.parse(rawData)
+            event.returnValue = settings.language
+        })
+
         ipcMain.on('request-worker-channel', (event) => {
             if (event.senderFrame === Main.mainWindow.webContents.mainFrame) {
                 const { port1, port2 } = new MessageChannelMain()
@@ -105,7 +133,7 @@ export default class Main {
         ipcMain.on('noNetwork', () => {
             dialog.showMessageBoxSync(Main.mainWindow, {
                 title: serverName,
-                message: 'There\'s no network connection.',
+                message: i18n.t('noConnection'),
                 type: 'error',
             })
             Main.application.quit()
@@ -114,7 +142,7 @@ export default class Main {
         ipcMain.on('errorServer', () => {
             dialog.showMessageBoxSync(Main.mainWindow, {
                 title: serverName,
-                message: 'There was an error connecting to the server.',
+                message: i18n.t('errorConnection'),
                 type: 'error',
             })
             Main.application.quit()
@@ -123,7 +151,7 @@ export default class Main {
         ipcMain.on('errorDownloadFile', (_, args) => {
             dialog.showMessageBoxSync(Main.mainWindow, {
                 title: serverName,
-                message: `An error occurred while downloading ${args.fileName}.`,
+                message: i18n.t('errorDownloadFile', { fileName: args.fileName }),
                 type: 'error',
                 detail: args.error,
             })
