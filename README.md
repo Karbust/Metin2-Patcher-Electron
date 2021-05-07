@@ -39,7 +39,7 @@ A small video on how to set it up:
 | yarn run lint-fix | Fixing some linting errors. |
 
 ## About the Patcher
-This project was made with the intend of learn more about Electron, something I wanted to do for a while.\
+This project was made with the intent of learn more about Electron, something I wanted to do for a while.\
 If the folders don't exist, they'll be created. If the files don't exist they will be downloaded.\
 The patcher checks the local files and if their checksum mismatches the remote checksum, they will get downloaded.\
 This patcher runs the downloads **asynchronously**, this means it will download multiple files at the same time.\
@@ -98,6 +98,18 @@ It will generate the JSON file with the names, sizes and checksum hash of the fi
 
 ![Dir1](https://i.imgur.com/0k1sM3Y.png) \
 ![Dir2](https://i.imgur.com/CHjlRiF.png)
+
+## Multi-language
+
+It ships with support for two languages, English (default) and Portuguese. These can be used as examples to add more languages.
+
+To add more languages, you must edit both `src\i18n.ts` and `src_electron\i18n.ts`.
+
+Three things are needed, import the translation file (.json) that must go inside the folder `localization\ `, and add the language on `resources` and `supportedLngs`.
+
+Do not edit the placeholders ( {{ }} ) when creating a new language, otherwise it won't work as expected.
+
+To add flags edit the file `src\components\Buttons.ts`. There are flags for every language that are supported by the official, just need to add the button.
 
 ## Issues
 

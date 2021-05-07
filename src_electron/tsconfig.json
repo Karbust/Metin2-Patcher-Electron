@@ -4,6 +4,8 @@
         "noImplicitAny": true,
         "sourceMap": true,
         "baseUrl": ".",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "outDir": "../build/electron"
     },
     "include": [
