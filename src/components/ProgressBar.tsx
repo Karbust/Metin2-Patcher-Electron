@@ -1,10 +1,12 @@
 import { FunctionComponent, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Context } from '../reducer/Store'
 
 const ProgressBar: FunctionComponent = () => {
     // @ts-ignore
     const { state } = useContext(Context)
+    const { t } = useTranslation()
 
     return (
         <div className='relative pt-1'>
@@ -15,9 +17,9 @@ const ProgressBar: FunctionComponent = () => {
                     >
                         {(() => {
                             if (state.completed === 100) {
-                                return 'Download Completed'
+                                return t('dlCompleted')
                             }
-                            return 'Download in progress'
+                            return t('dlProgress')
                         })()}
                     </span>
                 </div>
@@ -41,9 +43,9 @@ const ProgressBar: FunctionComponent = () => {
                     >
                         {(() => {
                             if (state.fileProgress === 100) {
-                                return 'Download Completed'
+                                return t('dlCompleted')
                             }
-                            return `Downloading ${state.currentFile}`
+                            return t('dlFile', { currentFile: state.currentFile })
                         })()}
                     </span>
                 </div>
