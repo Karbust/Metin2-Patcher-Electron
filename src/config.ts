@@ -1,7 +1,5 @@
-export const patchlistUrl = 'http://localhost:81/electron/files.json'
-export const patchlistFolder = 'http://localhost:81/electron/files/'
-/*export const patchlistUrl = 'https://url/files.json'
-export const patchlistFolder = 'https://url/files/'*/
+export const patchlistUrl = 'https://url/files.json'
+export const patchlistFolder = 'https://url/files/'
 
 export const serverName = 'Karbust'
 export const binaryName = 'Metin2Debug.exe'
