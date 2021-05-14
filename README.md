@@ -1,4 +1,7 @@
 # Metin2-Patcher-Electron
+[![CodeFactor](https://www.codefactor.io/repository/github/karbust/metin2-patcher-electron/badge)](https://www.codefactor.io/repository/github/karbust/metin2-patcher-electron)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/567b43c5901f4a568d9f8f5084ce73c2)](https://www.codacy.com/gh/Karbust/Metin2-Patcher-Electron/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Karbust/Metin2-Patcher-Electron&amp;utm_campaign=Badge_Grade)
+
 A simple metin2 patcher made in Electron with React and TypeScript.\
 The file verification is made with SHA256.
 

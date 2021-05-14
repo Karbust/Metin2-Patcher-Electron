@@ -58,6 +58,7 @@ module.exports = {
     'ignorePatterns': [
         '.eslintrc.js',
         'craco.config.js',
+        'stylelint.config.js',
         'tailwind.config.js',
         'dist/*'
     ],
