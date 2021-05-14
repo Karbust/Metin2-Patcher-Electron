@@ -9,7 +9,7 @@
         "outDir": "../build/electron"
     },
     "include": [
-        ".",
+        "."
     ],
     "exclude": [
         "node_modules"

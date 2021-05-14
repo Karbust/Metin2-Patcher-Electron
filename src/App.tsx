@@ -64,7 +64,7 @@ const App: FunctionComponent = () => {
                         ipcRenderer.send('request-worker-channel')
                         ipcRenderer.removeAllListeners('request-worker-channel')
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         ipcRenderer.send('errorServer')
                     })
             }
