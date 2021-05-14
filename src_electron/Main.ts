@@ -90,8 +90,6 @@ export default class Main {
                 if (confirmation.response === 0) {
                     Main.application.quit()
                 }
-            }).catch((err) => {
-                console.log(err)
             })
         })
 

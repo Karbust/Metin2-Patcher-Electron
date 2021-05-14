@@ -14,7 +14,9 @@
     "electron-start": "tsc --project src_electron/tsconfig.json && electron build/electron/src_electron/App.js",
     "electron-pack": "yarn build && tsc --project src_electron/tsconfig.json && electron-builder --win -c.extraMetadata.main=build/electron/src_electron/App.js",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
-    "lint-fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
+    "lint-fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix",
+    "css-lint": "npx stylelint \"src/**/*.css\"",
+    "css-lint-fix": "npx stylelint \"src/**/*.css\" --fix"
   },
   "build": {
     "extends": null,
@@ -95,6 +97,8 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "7",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.6",

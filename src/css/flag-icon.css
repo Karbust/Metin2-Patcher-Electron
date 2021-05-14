@@ -1,65 +1,83 @@
 .flag-icon-background {
-  background-size: contain;
-  background-position: 50%;
-  background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
 }
+
 .flag-icon {
-  background-size: contain;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  position: relative;
-  display: inline-block;
-  width: 1.33333333em;
-  line-height: 1em;
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+    display: inline-block;
+    width: 1.33333333em;
+    line-height: 1em;
 }
-.flag-icon:before {
-  content: "\00a0";
+
+.flag-icon::before {
+    content: "\00a0";
 }
+
 .flag-icon-ae {
-  background-image: url(./flags/ae.svg);
+    background-image: url(./flags/ae.svg);
 }
+
 .flag-icon-cz {
-  background-image: url(./flags/cz.svg);
+    background-image: url(./flags/cz.svg);
 }
+
 .flag-icon-de {
-  background-image: url(./flags/de.svg);
+    background-image: url(./flags/de.svg);
 }
+
 .flag-icon-dk {
-  background-image: url(./flags/dk.svg);
+    background-image: url(./flags/dk.svg);
 }
+
 .flag-icon-es {
-  background-image: url(./flags/es.svg);
+    background-image: url(./flags/es.svg);
 }
+
 .flag-icon-fr {
-  background-image: url(./flags/fr.svg);
+    background-image: url(./flags/fr.svg);
 }
+
 .flag-icon-gb {
-  background-image: url(./flags/gb.svg);
+    background-image: url(./flags/gb.svg);
 }
+
 .flag-icon-gr {
-  background-image: url(./flags/gr.svg);
+    background-image: url(./flags/gr.svg);
 }
+
 .flag-icon-hu {
-  background-image: url(./flags/hu.svg);
+    background-image: url(./flags/hu.svg);
 }
+
 .flag-icon-it {
-  background-image: url(./flags/it.svg);
+    background-image: url(./flags/it.svg);
 }
+
 .flag-icon-nl {
-  background-image: url(./flags/nl.svg);
+    background-image: url(./flags/nl.svg);
 }
+
 .flag-icon-pl {
-  background-image: url(./flags/pl.svg);
+    background-image: url(./flags/pl.svg);
 }
+
 .flag-icon-pt {
-  background-image: url(./flags/pt.svg);
+    background-image: url(./flags/pt.svg);
 }
+
 .flag-icon-ro {
-  background-image: url(./flags/ro.svg);
+    background-image: url(./flags/ro.svg);
 }
+
 .flag-icon-ru {
-  background-image: url(./flags/ru.svg);
+    background-image: url(./flags/ru.svg);
 }
+
 .flag-icon-tr {
-  background-image: url(./flags/tr.svg);
+    background-image: url(./flags/tr.svg);
 }

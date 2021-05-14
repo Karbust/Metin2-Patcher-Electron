@@ -1,4 +1,7 @@
 # Metin2-Patcher-Electron
+[![CodeFactor](https://www.codefactor.io/repository/github/karbust/metin2-patcher-electron/badge)](https://www.codefactor.io/repository/github/karbust/metin2-patcher-electron)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/567b43c5901f4a568d9f8f5084ce73c2)](https://www.codacy.com/gh/Karbust/Metin2-Patcher-Electron/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Karbust/Metin2-Patcher-Electron&amp;utm_campaign=Badge_Grade)
+
 A simple metin2 patcher made in Electron with React and TypeScript.\
 The file verification is made with SHA256.
 
@@ -50,8 +53,8 @@ For CSS was used TailwindCSS.
 
 After editing everything you must use the command `yarn run electron-pack` to build the application.\
 It will build 2 files inside the `release` folder:
-- Metin2 Patcher Electron-X.X.X-win.zip
-- metin2_patcher_electron.exe
+-   Metin2 Patcher Electron-X.X.X-win.zip
+-   metin2_patcher_electron.exe
 
 The first file is the full bundle zipped that can be extracted to the client folder (after removing the 2 unnecessary LINCENSE files). `DON'T USE THIS IF YOU ALREADY HAVE THE CEF BROWSER ON THE CLIENT.`\
 The second file is also zipped but will be extract to a temporary folder during runtime (takes about 3 seconds to fully open)  and clean after itself when it closes. `This is the way if you can't perform the first option.`
@@ -63,14 +66,14 @@ In case there isn't the possibility to use a local webserver (like Apache with X
 ### For NGINX
 
 Go to the configuration file for the patcher host and add this line: 
-```
+```text
 add_header 'Access-Control-Allow-Origin' 'http://localhost:3000';
 ```
 
 ### For Apache
 
 Go to the configuration file for the patcher host and add this line:
-```
+```text
 Header set Access-Control-Allow-Origin "http://localhost:3000"
 ```
 
@@ -81,7 +84,7 @@ a2enmod headers
 
 ### Running on development
 
-First start the frontend ***(ensure there's nothing running on default port 3000, otherwise a different port will be assigned and the patcher will show a white screen)***:
+First start the frontend _**(ensure there's nothing running on default port 3000, otherwise a different port will be assigned and the patcher will show a white screen)**_:
 ```bash
 yarn run start
 ```
