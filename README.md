@@ -53,8 +53,8 @@ For CSS was used TailwindCSS.
 
 After editing everything you must use the command `yarn run electron-pack` to build the application.\
 It will build 2 files inside the `release` folder:
-  - Metin2 Patcher Electron-X.X.X-win.zip
-  - metin2_patcher_electron.exe
+-   Metin2 Patcher Electron-X.X.X-win.zip
+-   metin2_patcher_electron.exe
 
 The first file is the full bundle zipped that can be extracted to the client folder (after removing the 2 unnecessary LINCENSE files). `DON'T USE THIS IF YOU ALREADY HAVE THE CEF BROWSER ON THE CLIENT.`\
 The second file is also zipped but will be extract to a temporary folder during runtime (takes about 3 seconds to fully open)  and clean after itself when it closes. `This is the way if you can't perform the first option.`
