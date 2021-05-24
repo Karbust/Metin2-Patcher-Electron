@@ -65,7 +65,6 @@
     "i18next": "^20.2.2",
     "is-online": "^9.0.0",
     "mkdirp": "^1.0.4",
-    "nedb": "^1.8.0",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -75,7 +74,6 @@
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.1.2",
     "@types/mkdirp": "^1.0.1",
-    "@types/nedb": "^1.8.11",
     "@types/node": "^15.0.2",
     "@types/node-fetch": "^2.5.10",
     "@types/react": "^17.0.5",
