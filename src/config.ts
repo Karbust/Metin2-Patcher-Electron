@@ -1,6 +1,9 @@
 export const patchlistUrl = 'https://url/files.json'
 export const patchlistFolder = 'https://url/files/'
 
+export const enableDiscordButton = true
+export const discordUrl = 'https://discord.gg/invite'
+
 export const serverName = 'Karbust'
 export const binaryName = 'Metin2Debug.exe'
 export const configName = 'config.exe'

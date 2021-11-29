@@ -2,8 +2,10 @@ import { existsSync, writeFileSync, readFileSync } from 'fs'
 import { spawn } from 'child_process'
 
 import i18next from 'i18next'
-import * as isDev from 'electron-is-dev'
-import { BrowserWindow, ipcMain, dialog, MessageChannelMain } from 'electron'
+import isDev from 'electron-is-dev'
+import {
+    BrowserWindow, ipcMain, dialog, MessageChannelMain, shell
+} from 'electron'
 
 import {
     binaryName, configName, debugFolder, launchParameters, serverName
@@ -105,6 +107,10 @@ export default class Main {
                 detached: true,
                 cwd: isDev ? debugFolder : process.env.PORTABLE_EXECUTABLE_DIR
             })
+        })
+
+        ipcMain.on('launchDiscord', async (_, args) => {
+            await shell.openExternal(args.url)
         })
 
         ipcMain.on('languageChange', (_, args) => {
