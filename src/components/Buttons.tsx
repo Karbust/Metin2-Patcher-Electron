@@ -3,6 +3,7 @@ import { getI18n, useTranslation } from 'react-i18next'
 
 import '../css/flag-icon.css'
 import { Context } from '../reducer/Store'
+import { discordUrl, enableDiscordButton } from '../config'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -12,6 +13,7 @@ const Buttons: FunctionComponent = () => {
     const { t } = useTranslation()
     const launchConfig = () => ipcRenderer.send('launchConfig')
     const launchClient = () => ipcRenderer.send('launchClient')
+    const launchDiscord = () => ipcRenderer.send('launchDiscord', { url: discordUrl })
     const changeLanguage = (lang: string) => {
         getI18n().changeLanguage(lang)
         ipcRenderer.send('languageChange', {
@@ -34,6 +36,17 @@ const Buttons: FunctionComponent = () => {
                     style={{ width: '32px', height: '32px' }}
                     onClick={() => changeLanguage('pt')}
                 />
+                {
+                    enableDiscordButton && (
+                        <button
+                            className='mr-3 bg-gray-500 text-white active:bg-gray-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+                            type='button'
+                            onClick={launchDiscord}
+                        >
+                            Discord
+                        </button>
+                    )
+                }
                 <button
                     className='disabled:opacity-50 mr-3 bg-gray-500 text-white active:bg-gray-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
                     type='button'
