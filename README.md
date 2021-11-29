@@ -10,7 +10,7 @@ The file verification is made with SHA256.
 
 ## Getting Started
 
-Install NodeJS: https://nodejs.org/en/download/ \
+Install NodeJS (16 or better): https://nodejs.org/en/download/ \
 Install Yarn: https://yarnpkg.com/getting-started/install
 
 Clone the repository:
