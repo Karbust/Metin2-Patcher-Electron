@@ -3,12 +3,20 @@ import { spawn } from 'child_process'
 
 import i18next from 'i18next'
 import isDev from 'electron-is-dev'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import {
     BrowserWindow, ipcMain, dialog, MessageChannelMain, shell
 } from 'electron'
 
 import {
-    binaryName, configName, debugFolder, launchParameters, serverName
+    binaryName,
+    configName,
+    debugFolder,
+    enableLocaleCfgUpdate,
+    launchParameters,
+    localeCfgPath,
+    locales,
+    serverName
 } from '../src/config'
 
 import i18n from './i18n'
@@ -23,6 +31,8 @@ export default class Main {
     static BrowserWindow: any
 
     static settingsFile = `${isDev ? debugFolder : process.env.PORTABLE_EXECUTABLE_DIR}\\patcher_settings`
+
+    static localeCfgFile = `${isDev ? debugFolder : process.env.PORTABLE_EXECUTABLE_DIR}\\${localeCfgPath}`
 
     private static onWindowAllClosed() {
         if (process.platform !== 'darwin') {
@@ -113,11 +123,14 @@ export default class Main {
             await shell.openExternal(args.url)
         })
 
-        ipcMain.on('languageChange', (_, args) => {
+        ipcMain.on('languageChange', async (_, args) => {
             const settings = JSON.parse(readFileSync(Main.settingsFile, 'utf8'))
             settings.language = args.language
-            i18next.changeLanguage(args.language)
+            await i18next.changeLanguage(args.language)
             writeFileSync(Main.settingsFile, JSON.stringify(settings))
+            if (enableLocaleCfgUpdate) {
+                writeFileSync(Main.localeCfgFile, locales[args.language] ?? locales.en)
+            }
         })
 
         ipcMain.on('getLanguage', (event) => {
