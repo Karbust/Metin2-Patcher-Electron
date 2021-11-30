@@ -1,3 +1,7 @@
+/// <reference types="vite/client" />
+
+export {}
+
 declare global {
     interface Window {
         require: any;

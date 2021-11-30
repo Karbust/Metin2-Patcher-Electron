@@ -1,8 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 @import url('./nunito.css');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 body {
     margin: 0;
@@ -15,6 +14,9 @@ body {
     color: #212529;
     text-align: left;
     background-color: #f8fafc;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
 }
 
 code {
@@ -161,4 +163,51 @@ code {
 .titlebar button#close:active {
     background-color: #b12a2a;
     color: #fff;
+}
+
+.swiper {
+    width: 100%;
+    height: 300px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background-color: #f8fafc;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(75, 85, 99, 0.75) !important;
+}
+
+.swiper-pagination-bullet-active {
+    color: #fff;
+    background: rgba(75, 85, 99, 1) !important;
 }
