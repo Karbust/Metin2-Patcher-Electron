@@ -6,11 +6,11 @@
 A simple metin2 patcher made in Electron with React and TypeScript.\
 The file verification is made with SHA256.
 
-![Patcher Screenshot](https://i.imgur.com/X7dasOc.png)
+![Patcher Screenshot](https://i.imgur.com/fy5TRcz.png)
 
 ## Getting Started
 
-Install NodeJS (16 or better): https://nodejs.org/en/download/ \
+Install NodeJS: https://nodejs.org/en/download/ \
 Install Yarn: https://yarnpkg.com/getting-started/install
 
 Clone the repository:
@@ -100,7 +100,7 @@ yarn run electron-start
 Using [this NodeJS script](https://gist.github.com/Karbust/14bbaba7910b72023e0229abf53e8d54), you shall place the client files inside a folder called `files` and run the script.\
 It will generate the JSON file with the names, sizes and checksum hash of the files.
 
-![Dir1](https://i.imgur.com/0k1sM3Y.png) \
+![Dir1](https://i.imgur.com/txFl7ju.png) \
 ![Dir2](https://i.imgur.com/CHjlRiF.png)
 
 ## Multi-language
@@ -114,6 +114,55 @@ Three things are needed, import the translation file (.json) that must go inside
 Do not edit the placeholders ( {{ }} ) when creating a new language, otherwise it won't work as expected.
 
 To add flags edit the file `src\components\Buttons.ts`. There are flags for every language that are supported by the official, just need to add the button.
+
+## Slider
+
+To use the slider you just need to configure the respective values on `src\config.ts`. The webserver file should look something like this:
+```json
+[{
+    "image": "img1.png",
+    "url": "https://google.com"
+}, {
+    "image": "img1.png",
+    "url": "https://metin2.dev"
+}]
+```
+
+Images should have a size of 780x300 pixels.
+
+The image path is relative to the directory defined by `src\config.ts` variable `patchSliderImages`.
+WebP images should be used instead PNG/JPG/JPEG, since they offer the same quality with a reduced size. Such can be done with a script like this (it will also remove any metadata):
+```js
+const imagemin = require("imagemin"),
+    webp = require("imagemin-webp"),
+    outputFolder = __dirname + "/img_webp/";
+
+(async () => {
+    await imagemin(['images/*.png}'], {
+        destination: outputFolder,
+        plugins: [webp({
+            lossless: false
+        })]
+    });
+
+    console.log('PNG images optimized');
+    
+    await imagemin(['images/*.{jpg,jpeg}'], {
+        destination: outputFolder,
+        plugins: [webp({
+            quality: 100
+        })]
+    });
+
+    console.log('JPG/JPEG images optimized');
+})();
+
+```
+To use this script you need to install the following packages:
+  - imagemin
+  - imagemin-webp
+
+The images should be placed inside a directory called `img` and the result will be outputted to `img_webp` directory.
 
 ## Issues
 

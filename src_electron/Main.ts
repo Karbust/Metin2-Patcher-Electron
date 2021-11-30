@@ -13,6 +13,7 @@ import {
     configName,
     debugFolder,
     enableLocaleCfgUpdate,
+    enableSlider,
     launchParameters,
     localeCfgPath,
     locales,
@@ -59,7 +60,7 @@ export default class Main {
 
         Main.mainWindow = new Main.BrowserWindow({
             width: 800,
-            height: 200,
+            height: enableSlider ? 520 : 200,
             resizable: false,
             fullscreenable: isDev,
             //transparent: true,
@@ -119,7 +120,7 @@ export default class Main {
             })
         })
 
-        ipcMain.on('launchDiscord', async (_, args) => {
+        ipcMain.on('launchUrl', async (_, args) => {
             await shell.openExternal(args.url)
         })
 
@@ -163,6 +164,14 @@ export default class Main {
                 type: 'error',
             })
             Main.application.quit()
+        })
+
+        ipcMain.on('errorSliderFile', () => {
+            dialog.showMessageBoxSync(Main.mainWindow, {
+                title: serverName,
+                message: i18n.t('errorSliderFile'),
+                type: 'error',
+            })
         })
 
         ipcMain.on('errorDownloadFile', (_, args) => {

@@ -13,7 +13,7 @@ const Buttons: FunctionComponent = () => {
     const { t } = useTranslation()
     const launchConfig = () => ipcRenderer.send('launchConfig')
     const launchClient = () => ipcRenderer.send('launchClient')
-    const launchDiscord = () => ipcRenderer.send('launchDiscord', { url: discordUrl })
+    const launchDiscord = () => ipcRenderer.send('launchUrl', { url: discordUrl })
     const changeLanguage = (lang: string) => {
         getI18n().changeLanguage(lang)
         ipcRenderer.send('languageChange', {

@@ -57,9 +57,10 @@ module.exports = {
     'parser': '@typescript-eslint/parser',
     'ignorePatterns': [
         '.eslintrc.js',
-        'craco.config.js',
         'stylelint.config.js',
         'tailwind.config.js',
+        'postcss.config.js',
+        'vite.config.js',
         'dist/*'
     ],
     'parserOptions': {

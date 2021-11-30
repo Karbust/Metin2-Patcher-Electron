@@ -7,6 +7,7 @@
         "dlFile": "A transferir {{currentFile}}",
         "noConnection": "Não existe ligação à internet.",
         "errorConnection": "Ocorreu um erro a ligar ao servidor.",
-        "errorDownloadFile": "Ocorreu um erro a transferir {{fileName}}"
+        "errorDownloadFile": "Ocorreu um erro a transferir {{fileName}}",
+        "errorSliderFile": "O ficheiro do slider não foi encontrado no servidor remoto."
     }
 }

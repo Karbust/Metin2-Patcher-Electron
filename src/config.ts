@@ -1,11 +1,19 @@
 export const patchlistUrl = 'https://url/files.json'
 export const patchlistFolder = 'https://url/files/'
 
+export const enableSlider = true //if false the slider will be disabled
+
+//if enableSlider is false the value of this variables is optional
+export const patchSliderUrl = 'https://url/slider.json'
+export const patchSliderImages = 'https://url/slider/'
+
 /*
 Karbust Localhost Debug URLs:
 
 export const patchlistUrl = 'http://localhost:81/electron/files.json'
 export const patchlistFolder = 'http://localhost:81/electron/files/'
+export const patchSliderUrl = 'http://localhost:81/electron/slider.json'
+export const patchSliderImages = 'http://localhost:81/electron/slider/'
  */
 
 export const enableDiscordButton = true //if false the button will not be displayed.
