@@ -1,12 +1,13 @@
 import { FunctionComponent, useContext, useEffect, useRef } from 'react'
-import * as isOnline from 'is-online'
+import isOnline from 'is-online'
 import { getI18n } from 'react-i18next'
 
 import Titlebar from './components/Titlebar'
+import Slider from './components/Slider'
 import ProgressBar from './components/ProgressBar'
 import Buttons from './components/Buttons'
 import { Context } from './reducer/Store'
-import { patchlistUrl } from './config'
+import { enableSlider, patchlistUrl } from './config'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -49,7 +50,7 @@ const App: FunctionComponent = () => {
 
     useEffect(() => {
         (async () => {
-            if (!await isOnline.default()) {
+            if (!await isOnline()) {
                 ipcRenderer.send('noNetwork')
             } else {
                 await getI18n().changeLanguage(ipcRenderer.sendSync('getLanguage'))
@@ -75,6 +76,7 @@ const App: FunctionComponent = () => {
         <div className='h-screen w-screen bg-gray-50'>
             <Titlebar />
             <div className='m-2.5'>
+                { enableSlider && <Slider /> }
                 <ProgressBar />
                 <Buttons />
             </div>
